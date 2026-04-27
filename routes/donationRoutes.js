@@ -5,7 +5,7 @@ import {
   getDonationByDonorId,
   deleteDonationById,
   deleteAllDonations,
-  createRazorpayOrder, 
+  createRazorpayOrder,
   verifyRazorpayPayment
 } from "../controllers/donationController.js";
 
@@ -13,15 +13,14 @@ const router = express.Router();
 
 router.post("/", createDonation);
 router.get("/", getAllDonations);
-router.get("/:donorId", getDonationByDonorId);
 
-
+// ✅ Static routes first
 router.post("/create-order", createRazorpayOrder);
 router.post("/verify-payment", verifyRazorpayPayment);
-
-router.delete("/:id", deleteDonationById);
 router.delete("/delete-all", deleteAllDonations);
 
-
+// ✅ Param routes last
+router.get("/:donorId", getDonationByDonorId);
+router.delete("/:id", deleteDonationById);
 
 export default router;

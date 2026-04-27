@@ -13,10 +13,12 @@ const router = express.Router();
 router.post("/", createVolunteer);
 router.get("/", getAllVolunteers);
 
+// ✅ Static routes first
 router.delete("/delete-all", deleteAllVolunteerApplications);
-router.delete("/:id", deleteVolunteerApplicationById);
 
+// ✅ Param routes last
 router.post("/:id/reject", rejectVolunteerApplication);
 router.post("/:id/accept", acceptVolunteerApplication);
+router.delete("/:id", deleteVolunteerApplicationById);
 
 export default router;
