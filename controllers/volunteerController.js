@@ -29,6 +29,9 @@ export const createVolunteer = async (req, res, next) => {
 export const getAllVolunteers = async (req, res, next) => {
   try {
     const volunteers = await Volunteer.find().sort({ createdAt: -1 });
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate");
+    res.set("Pragma", "no-cache");
+    res.set("Expires", "0");
 
     res.status(200).json({
       count: volunteers.length,
