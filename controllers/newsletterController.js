@@ -33,6 +33,11 @@ export const getAllSubscribers = async (req, res, next) => {
   try {
     const subscribers = await NewsletterSubscriber.find().sort({ createdAt: -1 });
 
+    // ADD THESE 3 LINES 👇
+    res.set("Cache-Control", "no-store, no-cache, must-revalidate");
+    res.set("Pragma", "no-cache");
+    res.set("Expires", "0");
+
     res.status(200).json({
       count: subscribers.length,
       data: subscribers
