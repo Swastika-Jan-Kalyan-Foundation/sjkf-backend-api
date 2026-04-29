@@ -5,7 +5,8 @@ import {
   deleteVolunteerApplicationById,
   rejectVolunteerApplication,
   acceptVolunteerApplication,
-  deleteAllVolunteerApplications
+  deleteAllVolunteerApplications,
+  getAllAcceptedVolunteers
 } from "../controllers/volunteerController.js";
 
 const router = express.Router();
