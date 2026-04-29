@@ -4,5 +4,5 @@ const router = express.Router()
 
 router.post("/subscribe", subscribeNewsletter)
 router.get("/", getAllSubscribers)
-
+router.delete("/", deleteSubscriber);
 export default router

@@ -41,3 +41,29 @@ export const getAllSubscribers = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteSubscriber = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const subscriber = await NewsletterSubscriber.findOneAndDelete({
+      email: email.toLowerCase()
+    });
+
+    if (!subscriber) {
+      return res.status(404).json({
+        message: "Subscriber not found"
+      });
+    }
+
+    res.status(200).json({
+      message: "Subscriber removed successfully"
+    });
+  } catch (error) {
+    next(error);
+  }
+};
