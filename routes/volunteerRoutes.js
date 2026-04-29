@@ -13,6 +13,8 @@ const router = express.Router();
 router.post("/", createVolunteer);
 router.get("/", getAllVolunteers);
 
+router.get("/accepted", getAllAcceptedVolunteers);
+
 // ✅ Static routes first
 router.delete("/delete-all", deleteAllVolunteerApplications);
 

@@ -128,3 +128,18 @@ export const deleteAllVolunteerApplications = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAllAcceptedVolunteers = async (req, res, next) => {
+  try {
+    const acceptedVolunteers = await AcceptedVolunteer.find().sort({
+      createdAt: -1
+    });
+
+    res.status(200).json({
+      count: acceptedVolunteers.length,
+      data: acceptedVolunteers
+    });
+  } catch (error) {
+    next(error);
+  }
+};
