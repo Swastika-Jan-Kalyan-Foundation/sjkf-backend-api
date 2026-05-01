@@ -24,6 +24,6 @@ router.delete("/delete-all", deleteAllVolunteerApplications);
 router.post("/:id/reject", rejectVolunteerApplication);
 router.post("/:id/accept", acceptVolunteerApplication);
 router.delete("/:id", deleteVolunteerApplicationById);
-router.delete("accepted/:id", deleteVolunteerApplicationById);
+router.delete("/accepted/:id", deleteVolunteerApplicationById);
 
 export default router;
