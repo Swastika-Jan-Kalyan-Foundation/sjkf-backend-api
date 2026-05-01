@@ -61,6 +61,25 @@ export const deleteVolunteerApplicationById = async (req, res, next) => {
   }
 };
 
+export const deleteAcceptedVolunteerById = async (req, res, next) => {
+  try {
+    const acceptedVolunteer = await AcceptedVolunteer.findByIdAndDelete(req.params.id);
+
+    if (!acceptedVolunteer) {
+      return res.status(404).json({
+        message: "Accepted volunteer not found"
+      });
+    }
+
+    res.status(200).json({
+      message: "Accepted volunteer deleted successfully",
+      data: acceptedVolunteer
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const rejectVolunteerApplication = async (req, res, next) => {
   try {
     const volunteer = await Volunteer.findByIdAndDelete(req.params.id);
