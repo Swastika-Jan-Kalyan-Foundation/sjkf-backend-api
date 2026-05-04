@@ -15,7 +15,7 @@ const app = express();
 
 // ✅ Updated Manual CORS (supports multiple origins)
 const allowedOrigins = [
-  "https://swastikajankalyanfoundation.netlify.app","https://sjkfadmindashboard.netlify.app"
+  "https://swastikajankalyanfoundation.netlify.app","https://sjkfadmindashboard.netlify.app", "https://swastikajankalyanfoundation.com"
 ];
 
 app.use((req, res, next) => {
@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 });
 
 
-const resend = new Resend("re_ZRPhTi66_693narJsbA65dhzMdB5ZzbA3");
+const resend = new Resend(".");
 
 
 app.post("/send-email", async (req, res) => {
