@@ -7,7 +7,7 @@ import volunteerRoutes from "./routes/volunteerRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import notFound from "./middleware/notFound.js";
 import errorHandler from "./middleware/errorHandler.js";
-
+import { Resend } from "resend";
 dotenv.config();
 connectDB();
 
@@ -41,6 +41,28 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.json({ message: "SJKF Backend API is running" });
+});
+
+
+const resend = new Resend("re_ZRPhTi66_693narJsbA65dhzMdB5ZzbA3");
+
+
+app.post("/send-email", async (req, res) => {
+  try {
+    const { to, subject, message } = req.body;
+
+    const data = await resend.emails.send({
+      from: "Your App <swastikajankalyanfoundation@gmail.com>", 
+      to,
+      subject,
+      html: `<p>${message}</p>`,
+    });
+
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: error.message });
+  }
 });
 
 app.use("/api/newsletter", newsletterRoutes);
