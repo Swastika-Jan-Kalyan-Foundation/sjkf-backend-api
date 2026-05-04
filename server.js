@@ -52,7 +52,7 @@ app.post("/send-email", async (req, res) => {
     const { to, subject, message } = req.body;
 
     const data = await resend.emails.send({
-      from: "Your App <swastikajankalyanfoundation@gmail.com>", 
+      from: "Swastika Jan Kalyan Foundation <swastikajankalyanfoundation@gmail.com>", 
       to,
       subject,
       html: `<p>${message}</p>`,
