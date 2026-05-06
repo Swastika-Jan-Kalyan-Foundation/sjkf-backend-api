@@ -26,7 +26,7 @@ const contactMessageSchema = new mongoose.Schema(
       type: String,
       required: [true, "Concern is required"],
       enum: [
-        "General Query",
+        "General Inquiry",
         "Volunteering",
         "Donations & Funding",
         "Tree Plantation Drive",
