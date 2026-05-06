@@ -2,6 +2,8 @@ import Volunteer from "../models/Volunteer.js";
 import {v4 as uuidv4} from "uuid"
 import { nanoid } from "nanoid";
 import AcceptedVolunteer from "../models/AcceptedVolunteers.js";
+import { Resend } from "resend";
+const resend = new Resend(process.env.RESEND_API);
 export const createVolunteer = async (req, res, next) => {
   try {
     const count = await Volunteer.countDocuments();
@@ -16,6 +18,13 @@ export const createVolunteer = async (req, res, next) => {
       ...req.body,
       applicantId: volunteerId 
     });
+
+    await resend.emails.send({
+      from: "Swastika Jan Kalyan Foundation <ngo@swastikajankalyanfoundation.com>", 
+      to: req.body.email,
+      subject: "Application to Swastika Jan Kalyan Foundation",
+      html: `<p>Thank u for applying</p>`
+    })
 
     res.status(201).json({
       message: "Volunteer application submitted successfully",

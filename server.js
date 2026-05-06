@@ -15,7 +15,7 @@ const app = express();
 
 // ✅ Updated Manual CORS (supports multiple origins)
 const allowedOrigins = [
-  "https://swastikajankalyanfoundation.netlify.app","https://sjkfadmindashboard.netlify.app", "https://swastikajankalyanfoundation.com"
+  "https://swastikajankalyanfoundation.netlify.app","https://sjkfadmindashboard.netlify.app", "https://swastikajankalyanfoundation.com", "http://localhost:5000"
 ];
 
 app.use((req, res, next) => {
@@ -43,16 +43,16 @@ app.get("/", (req, res) => {
   res.json({ message: "SJKF Backend API is running" });
 });
 
-
+/** 
 const resend = new Resend(".");
 
 
-app.post("/send-email", async (req, res) => {
+app.post("/send", async (req, res) => {
   try {
     const { to, subject, message } = req.body;
 
     const data = await resend.emails.send({
-      from: "Swastika Jan Kalyan Foundation <noreply@swastikajankalyanfoundation.com>", 
+      from: "Swastika Jan Kalyan Foundation <ngo@swastikajankalyanfoundation.com>", 
       to,
       subject,
       html: `<p>${message}</p>`,
@@ -64,7 +64,7 @@ app.post("/send-email", async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
-
+**/
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/donations", donationRoutes);
 app.use("/api/volunteers", volunteerRoutes);
