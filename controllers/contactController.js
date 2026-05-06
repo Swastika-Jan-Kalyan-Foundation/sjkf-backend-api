@@ -21,7 +21,7 @@ export const createContactMessage = async (req, res, next) => {
     });
 
     await resend.emails.send({
-      from: email,
+      from: "Swastika Jan Kalyan Foundation <ngo@swastikajankalyanfoundation.com>",
       to: "info@swastikajankalyanfoundation.com",
       subject: concern,
       html: `
@@ -68,6 +68,17 @@ export const createContactMessage = async (req, res, next) => {
                             <tr>
                               <td width="40%" style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Name</td>
                               <td width="60%" align="right" style="font-size:14px;color:#1a2b22;font-weight:bold;">${fullName}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td style="padding:14px 20px;border-bottom:1px solid #e8f0ec;">
+                          <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                              <td width="40%" style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Email</td>
+                              <td width="60%" align="right" style="font-size:14px;color:#1a2b22;font-weight:bold;">${email}</td>
                             </tr>
                           </table>
                         </td>
