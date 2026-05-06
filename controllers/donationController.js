@@ -303,7 +303,7 @@ export const verifyRazorpayPayment = async (req, res, next) => {
                               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                   <td width="45%" style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Amount</td>
-                                  <td width="55%" align="right" style="font-size:17px;color:#1f5f46;font-weight:bold;font-family:Georgia,serif;">${amount}</td>
+                                  <td width="55%" align="right" style="font-size:17px;color:#1f5f46;font-weight:bold;font-family:Georgia,serif;">${currency} ${amount}</td>
                                 </tr>
                               </table>
                             </td>
