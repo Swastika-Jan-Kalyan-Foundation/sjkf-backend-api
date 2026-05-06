@@ -226,23 +226,19 @@ export const verifyRazorpayPayment = async (req, res, next) => {
                       </td>
                     </tr>
     
-                    <!-- DONOR ID + TRANSACTION ID BAND -->
+                    <!-- DONOR ID — full width row -->
                     <tr>
-                      <td style="background:#174d38;padding:0;">
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                          <tr>
-                            <!-- Donor ID -->
-                            <td width="50%" style="padding:20px 24px 20px 40px;border-right:1px solid rgba(255,255,255,0.08);">
-                              <p style="margin:0 0 4px;font-size:10px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Donor ID</p>
-                              <p style="margin:0;font-size:18px;font-weight:bold;color:#74d4a0;font-family:Georgia,serif;letter-spacing:0.8px;">${donorId}</p>
-                            </td>
-                            <!-- Transaction ID -->
-                            <td width="50%" style="padding:20px 40px 20px 24px;">
-                              <p style="margin:0 0 4px;font-size:10px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Transaction ID</p>
-                              <p style="margin:0;font-size:18px;font-weight:bold;color:#74d4a0;font-family:Georgia,serif;letter-spacing:0.8px;">${transactionId}</p>
-                            </td>
-                          </tr>
-                        </table>
+                      <td style="background:#174d38;padding:18px 40px;border-bottom:1px solid rgba(255,255,255,0.06);">
+                        <p style="margin:0 0 4px;font-size:10px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Donor ID</p>
+                        <p style="margin:0;font-size:16px;font-weight:bold;color:#74d4a0;font-family:Georgia,serif;word-break:break-all;">${donorId}</p>
+                      </td>
+                    </tr>
+    
+                    <!-- TRANSACTION ID — full width row -->
+                    <tr>
+                      <td style="background:#174d38;padding:18px 40px;">
+                        <p style="margin:0 0 4px;font-size:10px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Transaction ID</p>
+                        <p style="margin:0;font-size:16px;font-weight:bold;color:#74d4a0;font-family:Georgia,serif;word-break:break-all;">${transactionId}</p>
                       </td>
                     </tr>
     
@@ -263,67 +259,62 @@ export const verifyRazorpayPayment = async (req, res, next) => {
                           <tr><td style="height:1px;background:#e4ede8;"></td></tr>
                         </table>
     
-                        <!-- Donation details label -->
+                        <!-- Details label -->
                         <p style="margin:0 0 16px;font-size:10px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#a0b8ad;">Donation Details</p>
     
                         <!-- Details box -->
                         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f6faf7;border-radius:8px;border:1px solid #dde8e3;margin-bottom:32px;">
     
-                          <!-- Full Name -->
                           <tr>
                             <td style="padding:14px 20px;border-bottom:1px solid #e8f0ec;">
                               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                  <td style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Full Name</td>
-                                  <td align="right" style="font-size:14px;color:#1a2b22;font-weight:bold;">${fullName}</td>
+                                  <td width="45%" style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Full Name</td>
+                                  <td width="55%" align="right" style="font-size:14px;color:#1a2b22;font-weight:bold;">${fullName}</td>
                                 </tr>
                               </table>
                             </td>
                           </tr>
     
-                          <!-- Email -->
                           <tr>
                             <td style="padding:14px 20px;border-bottom:1px solid #e8f0ec;">
                               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                  <td style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Email</td>
-                                  <td align="right" style="font-size:14px;color:#1a2b22;">${email}</td>
+                                  <td width="45%" style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Email</td>
+                                  <td width="55%" align="right" style="font-size:14px;color:#1a2b22;word-break:break-all;">${email}</td>
                                 </tr>
                               </table>
                             </td>
                           </tr>
     
-                          <!-- Phone -->
                           <tr>
                             <td style="padding:14px 20px;border-bottom:1px solid #e8f0ec;">
                               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                  <td style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Phone Number</td>
-                                  <td align="right" style="font-size:14px;color:#1a2b22;">${phoneNumber}</td>
+                                  <td width="45%" style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Phone</td>
+                                  <td width="55%" align="right" style="font-size:14px;color:#1a2b22;">${phoneNumber}</td>
                                 </tr>
                               </table>
                             </td>
                           </tr>
     
-                          <!-- Amount -->
                           <tr>
                             <td style="padding:14px 20px;border-bottom:1px solid #e8f0ec;">
                               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                  <td style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Amount</td>
-                                  <td align="right" style="font-size:16px;color:#1f5f46;font-weight:bold;font-family:Georgia,serif;">${currency} ${amount}</td>
+                                  <td width="45%" style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Amount</td>
+                                  <td width="55%" align="right" style="font-size:17px;color:#1f5f46;font-weight:bold;font-family:Georgia,serif;">${amount}</td>
                                 </tr>
                               </table>
                             </td>
                           </tr>
     
-                          <!-- Donation Purpose -->
                           <tr>
                             <td style="padding:14px 20px;">
                               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                  <td style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Donation Purpose</td>
-                                  <td align="right" style="font-size:14px;color:#1a2b22;">${donationPurpose}</td>
+                                  <td width="45%" style="font-size:12px;color:#8faa9e;font-weight:bold;text-transform:uppercase;letter-spacing:0.8px;">Purpose</td>
+                                  <td width="55%" align="right" style="font-size:14px;color:#1a2b22;">${donationPurpose}</td>
                                 </tr>
                               </table>
                             </td>
@@ -336,7 +327,7 @@ export const verifyRazorpayPayment = async (req, res, next) => {
                           <tr><td style="height:1px;background:#e4ede8;"></td></tr>
                         </table>
     
-                        <!-- CTA Button -->
+                        <!-- CTA -->
                         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
                           <tr>
                             <td align="center">
