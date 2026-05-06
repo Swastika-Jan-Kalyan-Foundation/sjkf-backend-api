@@ -19,11 +19,87 @@ export const createVolunteer = async (req, res, next) => {
       applicantId: volunteerId 
     });
 
+  
     await resend.emails.send({
       from: "Swastika Jan Kalyan Foundation <ngo@swastikajankalyanfoundation.com>", 
       to: req.body.email,
-      subject: "Application to Swastika Jan Kalyan Foundation",
-      html: `<p>Thank u for applying</p>`
+      subject: "Volunteer Application to Swastika Jan Kalyan Foundation",
+      html: `
+  <div style="margin:0;padding:0;background-color:#f4f6f8;font-family:Arial,Helvetica,sans-serif;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="padding:20px 0;">
+      <tr>
+        <td align="center">
+          
+          <!-- Container -->
+          <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+            
+            <!-- Header -->
+            <tr>
+              <td style="background:#0d6efd;padding:20px;text-align:center;color:#ffffff;">
+                <h1 style="margin:0;font-size:22px;">Swastika Jan Kalyan Foundation</h1>
+                <p style="margin:5px 0 0;font-size:14px;opacity:0.9;">Volunteer Application Confirmation</p>
+              </td>
+            </tr>
+
+            <!-- Body -->
+            <tr>
+              <td style="padding:30px;">
+                <h2 style="margin-top:0;color:#333;">Thank you for applying!</h2>
+                
+                <p style="color:#555;font-size:15px;line-height:1.6;">
+                  We’ve successfully received your volunteer application. Our team will review your submission and get back to you shortly.
+                </p>
+
+                <!-- Application ID Box -->
+                <div style="margin:25px 0;padding:15px;background:#f1f5ff;border-left:4px solid #0d6efd;border-radius:6px;">
+                  <p style="margin:0;font-size:14px;color:#333;">
+                    <strong>Application ID:</strong><br/>
+                    <span style="font-size:16px;color:#0d6efd;font-weight:bold;">
+                      ${volunteerId}
+                    </span>
+                  </p>
+                </div>
+
+                <p style="color:#555;font-size:15px;line-height:1.6;">
+                  Please keep this ID for future reference regarding your application status.
+                </p>
+
+                <!-- CTA Button -->
+                <div style="text-align:center;margin:30px 0;">
+                  <a href="https://swastikajankalyanfoundation.com" 
+                     style="background:#0d6efd;color:#ffffff;text-decoration:none;padding:12px 25px;border-radius:6px;font-size:14px;display:inline-block;">
+                    Visit Our Website
+                  </a>
+                </div>
+
+                <p style="color:#777;font-size:13px;line-height:1.5;">
+                  If you have any questions, feel free to reach out to us. We appreciate your interest in contributing to our mission.
+                </p>
+
+                <p style="margin-top:25px;color:#333;font-size:14px;">
+                  Warm regards,<br/>
+                  <strong>Swastika Jan Kalyan Foundation Team</strong>
+                </p>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td style="background:#f8f9fa;padding:15px;text-align:center;font-size:12px;color:#888;">
+                © ${new Date().getFullYear()} Swastika Jan Kalyan Foundation<br/>
+                <a href="https://swastikajankalyanfoundation.com" style="color:#0d6efd;text-decoration:none;">
+                  swastikajankalyanfoundation.com
+                </a>
+              </td>
+            </tr>
+
+          </table>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+`
     })
 
     res.status(201).json({
