@@ -16,7 +16,7 @@ const generateDonorId = async () => {
 
   while (exists) {
     const randomPart = nanoid(5);
-    donorId = `SJK-DON-${year}-${position}-${randomPart}`;
+    donorId = `SJKF-DON-${year}-${position}-${randomPart}`;
 
     const existingDonation = await Donation.findOne({ donorId });
     exists = !!existingDonation;
