@@ -138,6 +138,8 @@ export const verifyRazorpayPayment = async (req, res, next) => {
       fullName,
       email,
       phoneNumber,
+      panNumber,
+      address,
       amount,
       currency,
       donationPurpose,
@@ -326,7 +328,7 @@ export const verifyRazorpayPayment = async (req, res, next) => {
                         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
                           <tr><td style="height:1px;background:#e4ede8;"></td></tr>
                         </table>
-    
+                       
                         <!-- CTA -->
                         <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
                           <tr>
