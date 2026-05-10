@@ -188,6 +188,8 @@ export const verifyRazorpayPayment = async (req, res, next) => {
       fullName,
       email,
       phoneNumber,
+      panNumber,
+      address,
       amount,
       currency: currency || "INR",
       donationPurpose,
