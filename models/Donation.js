@@ -51,7 +51,15 @@ const donationSchema = new mongoose.Schema(
       type: String,
       trim: true
     },
-
+    panNumber: {
+      type: String, 
+      required: [true, "Pan  is required"],
+    },
+    
+    address: {
+      type: String,
+      required: [true, "Adress is required"],
+    },
     amount: {
       type: Number,
       required: [true, "Donation amount is required"],
