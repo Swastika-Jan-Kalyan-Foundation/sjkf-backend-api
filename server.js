@@ -5,6 +5,7 @@ import newsletterRoutes from "./routes/newsletterRoutes.js";
 import donationRoutes from "./routes/donationRoutes.js";
 import volunteerRoutes from "./routes/volunteerRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
+import certificateRoutes from './routes/certificateRoutes.js'
 import notFound from "./middleware/notFound.js";
 import errorHandler from "./middleware/errorHandler.js";
 import { Resend } from "resend";
@@ -69,6 +70,7 @@ app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/donations", donationRoutes);
 app.use("/api/volunteers", volunteerRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/certificate", certificateRoutes)
 
 app.use(notFound);
 app.use(errorHandler);

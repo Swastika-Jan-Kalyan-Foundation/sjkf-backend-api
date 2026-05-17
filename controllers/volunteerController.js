@@ -4,6 +4,8 @@ import { nanoid } from "nanoid";
 import AcceptedVolunteer from "../models/AcceptedVolunteers.js";
 import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API);
+
+
 export const createVolunteer = async (req, res, next) => {
   try {
     const count = await Volunteer.countDocuments();
