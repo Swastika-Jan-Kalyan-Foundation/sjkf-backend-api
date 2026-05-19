@@ -15,6 +15,10 @@ const certificateSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
+        certificateSummary: {
+            type: String,
+            trim: true
+        },
         certificateTitle: {
             type: String,
             trim: true
