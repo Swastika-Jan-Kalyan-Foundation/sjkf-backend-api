@@ -9,8 +9,11 @@ export const issueCertificate = async (req, res, next) => {
         const type = "CERTI"
         const year = new Date().getFullYear()
         const certiId = `${org}-${type}-${year}-${certiCount}-${randomPart}`
+        const today = new Date()
+        const issuedDate = today.toLocaleDateString('en-US').replace(/\//g, '-');
         const certificate = await Certificate.create({
             ...req.body,
+            issueDate: issuedDate,
             certificateId: certiId
         })
 
