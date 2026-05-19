@@ -16,7 +16,7 @@ const app = express();
 
 // ✅ Updated Manual CORS (supports multiple origins)
 const allowedOrigins = [
-  "https://swastikajankalyanfoundation.netlify.app","https://sjkfadmindashboard.netlify.app", "https://swastikajankalyanfoundation.com", "http://localhost:5000"
+  "https://swastikajankalyanfoundation.netlify.app","https://sjkfadmindashboard.netlify.app", "https://swastikajankalyanfoundation.com", "http://localhost:5173"
 ];
 
 app.use((req, res, next) => {
