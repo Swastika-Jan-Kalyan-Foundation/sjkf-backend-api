@@ -66,6 +66,14 @@ app.post("/send", async (req, res) => {
   }
 });
 **/
+
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
+});
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/donations", donationRoutes);
 app.use("/api/volunteers", volunteerRoutes);
