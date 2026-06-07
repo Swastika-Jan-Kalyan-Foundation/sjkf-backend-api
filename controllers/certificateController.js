@@ -11,11 +11,14 @@ export const issueCertificate = async (req, res, next) => {
         const certiId = `${org}-${type}-${year}-${certiCount}-${randomPart}`
         const today = new Date()
         const issuedDate = today.toLocaleDateString('en-US').replace(/\//g, '-');
+        console.log("BODY:", req.body);
+
         const certificate = await Certificate.create({
-            ...req.body,
-            issueDate: issuedDate,
-            certificateId: certiId
-        })
+          ...req.body,
+          certificateId: certiId
+        });
+        
+        console.log("SAVED:", certificate);
 
         res.status(201).json({
             message: "Ceritificate successfully issued",
