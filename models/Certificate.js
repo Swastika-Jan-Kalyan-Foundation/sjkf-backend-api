@@ -26,7 +26,7 @@ const certificateSchema = new mongoose.Schema(
         modeOfIssue: {
             type: String,
             trim: true, 
-            enum: ["Online with DSC", "Offline with Physical Sign", "Both"],
+            enum: ["Online with DSC","Online with Scan Signature", "Offline with Physical Sign", "Hybrid"],
         },
         physicalCopy: {
             type: String,
