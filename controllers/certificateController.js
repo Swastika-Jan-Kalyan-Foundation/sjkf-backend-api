@@ -12,10 +12,10 @@ export const issueCertificate = async (req, res, next) => {
         const today = new Date()
         const issuedDate = today.toLocaleDateString('en-US').replace(/\//g, '-');
         console.log("BODY:", req.body);
-
+        const finalCertificateId = req.body.certificateId || certiId;
         const certificate = await Certificate.create({
           ...req.body,
-          certificateId: certiId
+          certificateId: finalCertificateId,
         });
         
         console.log("SAVED:", certificate);
