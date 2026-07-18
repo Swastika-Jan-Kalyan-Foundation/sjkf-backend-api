@@ -3,29 +3,19 @@ import { Certificate } from "../models/Certificate.js";
 
 export const issueCertificate = async (req, res, next) => {
     try {
-        const certiCount = await Certificate.countDocuments()
-        const randomPart = nanoid(5)
-        const org = "SJKF"
-        const type = "CERTI"
-        const year = new Date().getFullYear()
-        const certiId = `${org}-${type}-${year}-${certiCount}-${randomPart}`
-        
         console.log("BODY:", req.body);
-        const rawId = req.body.certificateId 
+        
 
-        const certificate = await Certificate.create({
-          ...req.body,
-          rawId: finalCertificateId,
-        });
+        const certificate = await Certificate.create(req.body);
         
         console.log("SAVED:", certificate);
 
         res.status(201).json({
             message: "Certificate successfully issued", 
             data: certificate
-        })
+        });
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
 
