@@ -11,12 +11,11 @@ export const issueCertificate = async (req, res, next) => {
         const certiId = `${org}-${type}-${year}-${certiCount}-${randomPart}`
         
         console.log("BODY:", req.body);
-        const rawId = req.body.certificateId || "";
-        const finalCertificateId = rawId.trim() !== "" ? rawId.trim() : certiId;
+        const rawId = req.body.certificateId 
 
         const certificate = await Certificate.create({
           ...req.body,
-          certificateId: finalCertificateId,
+          rawId: finalCertificateId,
         });
         
         console.log("SAVED:", certificate);
