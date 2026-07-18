@@ -9,10 +9,11 @@ export const issueCertificate = async (req, res, next) => {
         const type = "CERTI"
         const year = new Date().getFullYear()
         const certiId = `${org}-${type}-${year}-${certiCount}-${randomPart}`
-        const today = new Date()
-        const issuedDate = today.toLocaleDateString('en-US').replace(/\//g, '-');
+        
         console.log("BODY:", req.body);
-        const finalCertificateId = req.body.certificateId || certiId;
+        const rawId = req.body.certificateId || "";
+        const finalCertificateId = rawId.trim() !== "" ? rawId.trim() : certiId;
+
         const certificate = await Certificate.create({
           ...req.body,
           certificateId: finalCertificateId,
@@ -21,7 +22,7 @@ export const issueCertificate = async (req, res, next) => {
         console.log("SAVED:", certificate);
 
         res.status(201).json({
-            message: "Ceritificate successfully issued",
+            message: "Certificate successfully issued", 
             data: certificate
         })
     } catch (error) {
