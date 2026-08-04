@@ -244,6 +244,115 @@ export const rejectVolunteerApplication = async (req, res, next) => {
       });
     }
 
+    await resend.emails.send({
+      from: "Swastika Jan Kalyan Foundation <ngo@swastikajankalyanfoundation.com>",
+      to: volunteer.email,
+      subject: "Update on Your Volunteer Application to Swastika Jan Kalyan Foundation",
+      html: `
+      <div style="background-color:#f4f7f5;padding:32px 16px;font-family:Arial,sans-serif;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td align="center">
+            <table width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
+
+              <!-- LOGO / ORG NAME -->
+              <tr>
+                <td align="center" style="padding-bottom:24px;">
+                  <p style="margin:0;font-size:13px;font-weight:bold;color:#2a6644;letter-spacing:1px;text-transform:uppercase;">Swastika Jan Kalyan Foundation</p>
+                </td>
+              </tr>
+
+              <!-- CARD -->
+              <tr>
+                <td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #dde8e3;">
+
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+
+                    <!-- HEADER BAND -->
+                    <tr>
+                      <td style="background:#4a4a4a;padding:36px 40px;border-radius:12px 12px 0 0;">
+                        <p style="margin:0 0 8px;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#bfbfbf;">Volunteer Program</p>
+                        <h1 style="margin:0 0 10px;font-size:32px;font-weight:bold;color:#ffffff;font-family:Georgia,serif;line-height:1.2;">Application Update</h1>
+                        <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.65);line-height:1.6;">Thank you for your interest in volunteering with us.</p>
+                      </td>
+                    </tr>
+
+                    <!-- APPLICATION ID BOX -->
+                    <tr>
+                      <td style="background:#3a3a3a;padding:20px 40px;">
+                        <p style="margin:0 0 4px;font-size:10px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Application ID</p>
+                        <p style="margin:0;font-size:22px;font-weight:bold;color:#d9d9d9;font-family:Georgia,serif;letter-spacing:1px;">${volunteer.applicantId}</p>
+                      </td>
+                    </tr>
+
+                    <!-- BODY -->
+                    <tr>
+                      <td style="padding:40px;">
+
+                        <!-- Greeting -->
+                        <p style="margin:0 0 20px;font-size:15px;color:#2a3d35;line-height:1.7;">
+                          Dear <strong>${volunteer.name}</strong>,
+                        </p>
+                        <p style="margin:0 0 20px;font-size:15px;color:#4a6358;line-height:1.7;">
+                          Thank you for taking the time to apply to volunteer with the Swastika Jan Kalyan Foundation, and for your genuine interest in our work.
+                        </p>
+                        <p style="margin:0 0 32px;font-size:15px;color:#4a6358;line-height:1.7;">
+                          After careful review, we regret to inform you that we are unable to move forward with your application at this time. This decision was not easy, as we received applications from many dedicated individuals like yourself.
+                        </p>
+
+                        <!-- Divider -->
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
+                          <tr><td style="height:1px;background:#e4ede8;"></td></tr>
+                        </table>
+
+                        <p style="margin:0 0 32px;font-size:15px;color:#4a6358;line-height:1.7;">
+                          We truly appreciate your willingness to contribute to our cause, and we encourage you to stay connected with us and apply again for future opportunities.
+                        </p>
+
+                        <!-- CTA Button -->
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
+                          <tr>
+                            <td align="center">
+                              <a href="https://swastikajankalyanfoundation.com" style="display:inline-block;background:#1f5f46;color:#ffffff;text-decoration:none;font-size:14px;font-weight:bold;padding:14px 32px;border-radius:6px;letter-spacing:0.3px;">Visit Our Website</a>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <!-- Sign off -->
+                        <p style="margin:0 0 4px;font-size:14px;color:#4a6358;line-height:1.7;">
+                          Wishing you the very best in your future endeavours.
+                        </p>
+                        <p style="margin:20px 0 0;font-size:14px;color:#1a2b22;">
+                          Warm regards,<br/>
+                          <strong>Swastika Jan Kalyan Foundation Team</strong>
+                        </p>
+
+                      </td>
+                    </tr>
+
+                    <!-- FOOTER -->
+                    <tr>
+                      <td style="background:#f1f6f3;border-top:1px solid #dde8e3;padding:20px 40px;border-radius:0 0 12px 12px;">
+                        <p style="margin:0;font-size:11px;color:#8faa9e;text-align:center;line-height:1.8;">
+                          © ${new Date().getFullYear()} Swastika Jan Kalyan Foundation &nbsp;·&nbsp;
+                          <a href="https://swastikajankalyanfoundation.com" style="color:#2a6644;text-decoration:none;font-weight:bold;">swastikajankalyanfoundation.com</a>
+                          <br/>Registered NGO, India
+                        </p>
+                      </td>
+                    </tr>
+
+                  </table>
+                </td>
+              </tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+      `
+    });
+
     res.status(200).json({
       message: "Volunteer application rejected and deleted successfully",
       data: volunteer
@@ -282,6 +391,155 @@ export const acceptVolunteerApplication = async (req, res, next) => {
     });
 
     await Volunteer.findByIdAndDelete(req.params.id);
+
+    await resend.emails.send({
+      from: "Swastika Jan Kalyan Foundation <ngo@swastikajankalyanfoundation.com>",
+      to: volunteer.email,
+      subject: "Welcome to Swastika Jan Kalyan Foundation!",
+      html: `
+      <div style="background-color:#f4f7f5;padding:32px 16px;font-family:Arial,sans-serif;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td align="center">
+            <table width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
+
+              <!-- LOGO / ORG NAME -->
+              <tr>
+                <td align="center" style="padding-bottom:24px;">
+                  <p style="margin:0;font-size:13px;font-weight:bold;color:#2a6644;letter-spacing:1px;text-transform:uppercase;">Swastika Jan Kalyan Foundation</p>
+                </td>
+              </tr>
+
+              <!-- CARD -->
+              <tr>
+                <td style="background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #dde8e3;">
+
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+
+                    <!-- GREEN HEADER BAND -->
+                    <tr>
+                      <td style="background:#1f5f46;padding:36px 40px;border-radius:12px 12px 0 0;">
+                        <p style="margin:0 0 8px;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#74d4a0;">Volunteer Program</p>
+                        <h1 style="margin:0 0 10px;font-size:32px;font-weight:bold;color:#ffffff;font-family:Georgia,serif;line-height:1.2;">Welcome Aboard!</h1>
+                        <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.65);line-height:1.6;">We're thrilled to have you join our volunteer family.</p>
+                      </td>
+                    </tr>
+
+                    <!-- APPLICATION ID BOX -->
+                    <tr>
+                      <td style="background:#174d38;padding:20px 40px;">
+                        <p style="margin:0 0 4px;font-size:10px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);">Application ID</p>
+                        <p style="margin:0;font-size:22px;font-weight:bold;color:#74d4a0;font-family:Georgia,serif;letter-spacing:1px;">${volunteer.applicantId}</p>
+                      </td>
+                    </tr>
+
+                    <!-- BODY -->
+                    <tr>
+                      <td style="padding:40px;">
+
+                        <!-- Greeting -->
+                        <p style="margin:0 0 20px;font-size:15px;color:#2a3d35;line-height:1.7;">
+                          Dear <strong>${volunteer.name}</strong>,
+                        </p>
+                        <p style="margin:0 0 32px;font-size:15px;color:#4a6358;line-height:1.7;">
+                          Congratulations! We're delighted to inform you that your application has been accepted. Welcome to the Swastika Jan Kalyan Foundation family — we're excited to have you with us.
+                        </p>
+
+                        <!-- Divider -->
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
+                          <tr><td style="height:1px;background:#e4ede8;"></td></tr>
+                        </table>
+
+                        <!-- What's next label -->
+                        <p style="margin:0 0 16px;font-size:10px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#a0b8ad;">What happens next</p>
+
+                        <!-- Step 1 -->
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:14px;">
+                          <tr>
+                            <td width="36" valign="top">
+                              <div style="width:28px;height:28px;border-radius:50%;background:#eaf4ee;border:1px solid #c0ddc9;text-align:center;line-height:28px;font-size:13px;font-weight:bold;color:#2a6644;">1</div>
+                            </td>
+                            <td style="padding-left:12px;">
+                              <p style="margin:0 0 2px;font-size:14px;font-weight:bold;color:#1a2b22;">Welcome Kit</p>
+                              <p style="margin:0;font-size:13px;color:#7a9589;line-height:1.5;">You'll receive an orientation and welcome kit shortly.</p>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <!-- Step 2 -->
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:14px;">
+                          <tr>
+                            <td width="36" valign="top">
+                              <div style="width:28px;height:28px;border-radius:50%;background:#eaf4ee;border:1px solid #c0ddc9;text-align:center;line-height:28px;font-size:13px;font-weight:bold;color:#2a6644;">2</div>
+                            </td>
+                            <td style="padding-left:12px;">
+                              <p style="margin:0 0 2px;font-size:14px;font-weight:bold;color:#1a2b22;">Programme Match</p>
+                              <p style="margin:0;font-size:13px;color:#7a9589;line-height:1.5;">Our team will match you with a team based on your interests and skills.</p>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <!-- Step 3 -->
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
+                          <tr>
+                            <td width="36" valign="top">
+                              <div style="width:28px;height:28px;border-radius:50%;background:#eaf4ee;border:1px solid #c0ddc9;text-align:center;line-height:28px;font-size:13px;font-weight:bold;color:#2a6644;">3</div>
+                            </td>
+                            <td style="padding-left:12px;">
+                              <p style="margin:0 0 2px;font-size:14px;font-weight:bold;color:#1a2b22;">Get Started</p>
+                              <p style="margin:0;font-size:13px;color:#7a9589;line-height:1.5;">A coordinator will reach out to help you begin your journey with us.</p>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <!-- Divider -->
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
+                          <tr><td style="height:1px;background:#e4ede8;"></td></tr>
+                        </table>
+
+                        <!-- CTA Button -->
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
+                          <tr>
+                            <td align="center">
+                              <a href="https://swastikajankalyanfoundation.com" style="display:inline-block;background:#1f5f46;color:#ffffff;text-decoration:none;font-size:14px;font-weight:bold;padding:14px 32px;border-radius:6px;letter-spacing:0.3px;">Visit Our Website</a>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <!-- Sign off -->
+                        <p style="margin:0 0 4px;font-size:14px;color:#4a6358;line-height:1.7;">
+                          If you have any questions, feel free to reach out. We can't wait to see the difference you'll make.
+                        </p>
+                        <p style="margin:20px 0 0;font-size:14px;color:#1a2b22;">
+                          Warm regards,<br/>
+                          <strong>Swastika Jan Kalyan Foundation Team</strong>
+                        </p>
+
+                      </td>
+                    </tr>
+
+                    <!-- FOOTER -->
+                    <tr>
+                      <td style="background:#f1f6f3;border-top:1px solid #dde8e3;padding:20px 40px;border-radius:0 0 12px 12px;">
+                        <p style="margin:0;font-size:11px;color:#8faa9e;text-align:center;line-height:1.8;">
+                          © ${new Date().getFullYear()} Swastika Jan Kalyan Foundation &nbsp;·&nbsp;
+                          <a href="https://swastikajankalyanfoundation.com" style="color:#2a6644;text-decoration:none;font-weight:bold;">swastikajankalyanfoundation.com</a>
+                          <br/>Registered NGO, India
+                        </p>
+                      </td>
+                    </tr>
+
+                  </table>
+                </td>
+              </tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+      `
+    });
 
     res.status(201).json({
       message: "Volunteer application accepted successfully",
