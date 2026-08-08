@@ -1,20 +1,36 @@
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import helmet from "helmet";
 import connectDB from "./config/db.js";
 import newsletterRoutes from "./routes/newsletterRoutes.js";
 import donationRoutes from "./routes/donationRoutes.js";
 import volunteerRoutes from "./routes/volunteerRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import certificateRoutes from './routes/certificateRoutes.js'
+import authRoutes from "./routes/authRoutes.js";
+import requireAuth from "./middleware/requireAuth.js";
 import notFound from "./middleware/notFound.js";
 import errorHandler from "./middleware/errorHandler.js";
 import { Resend } from "resend";
 dotenv.config();
+
+const REQUIRED_ENV = ["MONGO_URI", "JWT_SECRET"];
+const missingEnv = REQUIRED_ENV.filter((k) => !process.env[k]);
+if (missingEnv.length) {
+  console.error(`[startup] Missing required env vars: ${missingEnv.join(", ")}`);
+  process.exit(1);
+}
+
 connectDB();
 
 const app = express();
 
-// ✅ Updated Manual CORS (supports multiple origins)
+app.set("trust proxy", 1); 
+
+app.use(helmet());
+
+
 const allowedOrigins = [
   "https://swastikajankalyanfoundation.netlify.app","https://sjkfadmindashboard.netlify.app", "https://swastikajankalyanfoundation.com", "http://localhost:5173"
 ];
@@ -37,8 +53,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.json());
+app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.json({ message: "SJKF Backend API is running" });
@@ -74,11 +91,15 @@ app.get("/health", (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+
+app.use("/api/auth", authRoutes);
+
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/donations", donationRoutes);
 app.use("/api/volunteers", volunteerRoutes);
 app.use("/api/contact", contactRoutes);
-app.use("/api/certificate", certificateRoutes)
+
+app.use("/api/certificate", requireAuth, certificateRoutes)
 
 app.use(notFound);
 app.use(errorHandler);
