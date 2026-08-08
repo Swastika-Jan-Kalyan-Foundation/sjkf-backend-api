@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 const SESSION_HOURS = Number(process.env.SESSION_HOURS || 6);
 const SESSION_SECONDS = SESSION_HOURS * 60 * 60;
@@ -18,4 +18,4 @@ function verifyToken(token) {
   return jwt.verify(token, process.env.JWT_SECRET);
 }
 
-module.exports = { signToken, verifyToken, SESSION_SECONDS };
+export { signToken, verifyToken, SESSION_SECONDS };
