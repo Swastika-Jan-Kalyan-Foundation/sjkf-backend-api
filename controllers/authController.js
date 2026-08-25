@@ -9,7 +9,7 @@ function cookieOptions() {
   return {
     httpOnly: true, 
     secure: process.env.NODE_ENV === "production", 
-    sameSite: "strict", 
+    sameSite: "none", 
     maxAge: SESSION_SECONDS * 1000,
     path: "/",
   };
