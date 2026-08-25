@@ -17,6 +17,8 @@ async function requireAuth(req, res, next) {
       return res.status(401).json({ error: "Session expired, please log in again" });
     }
 
+
+
     const user = await User.findById(payload.sub);
     if (!user || user.tokenVersion !== payload.tv) {
      
@@ -35,7 +37,9 @@ function cookieClearOptions() {
   return {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "none",
+
+    
     path: "/",
   };
 }
