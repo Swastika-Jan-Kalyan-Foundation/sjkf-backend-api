@@ -1,0 +1,14 @@
+POST http://localhost:5000/api/certificate
+Content-Type: application/json
+
+{
+    "certificateId": "SJKF-2026-SS-10",
+    "issueDate": "2026-06-20",
+    "issuedTo": "Mukesh Burman",
+    "certificateSummary": "This certificate has been awarded to Mukesh Burman for his generous and selfless act of donating blood and helping to save lives under our initiative Swastika Sanjeevani",
+    "certificateTitle": "Blood Donation Certificate",
+    "modeOfIssue": "Offline with Physical Sign",
+    "physicalCopy": "Yes",
+    "signingAutority": "Ashish Yash",
+    "recommender": "N/A"
+}
